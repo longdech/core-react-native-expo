@@ -19,8 +19,8 @@ module.exports = {
   jsxBracketSameLine: false,
 
   // TailwindCSS specific (nếu dùng)
-  //   tailwindConfig: "./tailwind.config.js",
-  //   tailwindFunctions: ["clsx", "cn", "twMerge"],
+  tailwindConfig: './tailwind.config.js',
+  tailwindFunctions: ['clsx', 'cn', 'twMerge'],
 
   // Overrides cho từng loại file
   overrides: [
