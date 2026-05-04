@@ -1,6 +1,8 @@
+import { QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './auth-provider';
 import { ThemeProvider } from './theme-provider';
 import { ReactNode } from 'react';
+import { queryClient } from '@/api/client';
 
 interface AppProviderProps {
   children: ReactNode;
@@ -8,8 +10,10 @@ interface AppProviderProps {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <AuthProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 };
