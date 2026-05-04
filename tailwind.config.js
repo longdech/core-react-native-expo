@@ -5,6 +5,28 @@ module.exports = {
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
+      fontFamily: {
+        googleSans: ['GoogleSans', 'sans-serif'],
+        googleSansItalic: ['GoogleSans-Italic', 'sans-serif'],
+        googleSansMedium: ['GoogleSans-Medium', 'sans-serif'],
+        googleSansMediumItalic: ['GoogleSans-MediumItalic', 'sans-serif'],
+        googleSansSemiBold: ['GoogleSans-SemiBold', 'sans-serif'],
+        googleSansSemiBoldItalic: ['GoogleSans-SemiBoldItalic', 'sans-serif'],
+        googleSansBold: ['GoogleSans-Bold', 'sans-serif'],
+        googleSansBoldItalic: ['GoogleSans-BoldItalic', 'sans-serif'],
+      },
+      fontSize: {
+        xxs: ['10px', { lineHeight: '16px' }],
+        xs: ['12px', { lineHeight: '16px' }],
+        sm: ['14px', { lineHeight: '20px' }],
+        base: ['16px', { lineHeight: '24px' }],
+        lg: ['18px', { lineHeight: '28px' }],
+        xl: ['20px', { lineHeight: '28px' }],
+        '2xl': ['24px', { lineHeight: '32px' }],
+        '3xl': ['30px', { lineHeight: '40px' }],
+        '4xl': ['36px', { lineHeight: '48px' }],
+        '5xl': ['48px', { lineHeight: '64px' }],
+      },
       colors: {
         background: 'var(--color-background)',
         foreground: 'var(--color-foreground)',

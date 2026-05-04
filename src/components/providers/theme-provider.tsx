@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { colorScheme } from 'nativewind';
 
-import { COLORS, ColorScheme, THEMES } from '@/constants/Themes';
+import { COLORS, type ColorScheme, THEMES } from '@/theme';
 
 interface ThemeProviderProps {
   children: ReactNode;

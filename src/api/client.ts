@@ -1,4 +1,4 @@
-import { ENV } from '@/constants/Env';
+import { ENV } from '@/constants/env';
 import {
   createServiceProvider,
   HttpClient,

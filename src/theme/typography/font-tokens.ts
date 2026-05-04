@@ -1,8 +1,7 @@
-import { FontFamilyType, TEXT_SIZES, TextSizeType } from '@/constants/Themes';
+import type { FontFamilyType, TextSizeType } from '@/theme/typography/fonts';
+import { TEXT_SIZES } from '@/theme/typography/fonts';
 
-export const getFontSize = (size: TextSizeType) => {
-  return TEXT_SIZES[size];
-};
+export const getFontSize = (size: TextSizeType) => TEXT_SIZES[size];
 
 export type FontWeightType = 'Regular' | 'Medium' | 'SemiBold' | 'Bold';
 export type TextFontStyleType = 'normal' | 'italic';
