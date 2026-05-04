@@ -24,6 +24,7 @@ module.exports = ({ config }) => {
       },
       edgeToEdgeEnabled: true,
       predictiveBackGestureEnabled: false,
+      softwareKeyboardLayoutMode: 'resize',
     },
     web: {
       bundler: 'metro',

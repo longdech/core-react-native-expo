@@ -1,7 +1,14 @@
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import React from 'react';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function TabLayout() {
+  const { user } = useAuth();
+
+  if (!user?.emailVerified) {
+    return <Redirect href="/verify-email" />;
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -11,13 +18,13 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
+          title: 'Home',
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="profile"
         options={{
-          title: 'Tab Two',
+          title: 'Profile',
         }}
       />
     </Tabs>

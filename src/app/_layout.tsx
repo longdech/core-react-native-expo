@@ -12,11 +12,12 @@ import 'react-native-reanimated';
 import './global.css';
 import { useTheme } from '@/hooks/use-theme';
 import { AppProvider } from '@/components/providers/app-provider';
+import { useAuth } from '@/hooks/use-auth';
 
 export { ErrorBoundary } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
+  initialRouteName: '(auth)',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -50,10 +51,18 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const { isDark } = useTheme();
+  const { isAuthenticated } = useAuth();
+
   return (
     <RNThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Protected guard={!isAuthenticated}>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        </Stack.Protected>
+        <Stack.Protected guard={isAuthenticated}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(main)" options={{ headerShown: false }} />
+        </Stack.Protected>
       </Stack>
     </RNThemeProvider>
   );
