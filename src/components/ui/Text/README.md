@@ -12,8 +12,11 @@ Text/
 │   ├── base-text.tsx             # RN Text + fontMetrics + className
 │   └── create-font-metrics-text.tsx  # Factory cho font mới
 └── fonts/
-    └── google-sans/
-        ├── google-sans-text.tsx
+    ├── google-sans/
+    │   ├── google-sans-text.tsx
+    │   └── index.ts
+    └── be-vietnam-pro/
+        ├── be-vietnam-pro-text.tsx
         └── index.ts
 ```
 
@@ -36,6 +39,13 @@ mọi bộ font.
 Preset NativeWind theo variant (ví dụ nút): `variant="button"` tự thêm `text-center uppercase`
 (không nằm trong font metrics).
 
+## `BeVietnamProText`
+
+Cùng API với `GoogleSansText` (`variant` / `size` / `weight` / `className` …), metrics từ
+`@/theme/typography/be-vietnam-pro-metrics`. Toàn bộ file Be Vietnam Pro trong
+`src/assets/fonts/Be_Vietnam_Pro` đã đăng ký trong `FONT_FAMILIES.BeVietnamPro` và được gộp vào
+`useFonts` ở root.
+
 ## `createFontMetricsText`
 
 Dùng khi thêm font khác (Inter, …): cung cấp hàm `resolveFontMetrics(props) => FontMetrics`, nhận
@@ -46,6 +56,7 @@ lại component đã gắn `BaseText` + `defaultClassName` tùy chọn.
 ```ts
 import {
   BaseText,
+  BeVietnamProText,
   GoogleSansText,
   createFontMetricsText,
   getFontFamily,

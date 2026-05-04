@@ -1,4 +1,10 @@
 export {
+  beVietnamProVariantClassName,
+  getBeVietnamProThemeMetrics,
+  resolveBeVietnamProSizeMetrics,
+  resolveBeVietnamProVariantMetrics,
+} from '@/theme/typography/be-vietnam-pro-metrics';
+export {
   type FontWeightType,
   getFontFamily,
   getFontSize,

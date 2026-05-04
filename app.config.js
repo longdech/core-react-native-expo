@@ -35,20 +35,28 @@ module.exports = ({ config }) => {
       'expo-router',
       // TODO: Uncomment this when we have the font files for production build
       // [
-      //   "expo-font",
+      //   'expo-font',
       //   {
-      //     "fonts": [
-      //       "./assets/fonts/google-sans/static/GoogleSans-Regular.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-Medium.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-SemiBold.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-Bold.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-Italic.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-MediumItalic.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-SemiBoldItalic.ttf",
-      //       "./assets/fonts/google-sans/static/GoogleSans-BoldItalic.ttf"
-      //     ]
-      //   }
-      // ]
+      //     fonts: [
+      //       './assets/fonts/Google_Sans/GoogleSans-Regular.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-Medium.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-SemiBold.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-Bold.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-Italic.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-MediumItalic.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-SemiBoldItalic.ttf',
+      //       './assets/fonts/Google_Sans/GoogleSans-BoldItalic.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Regular.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Medium.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-SemiBold.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Italic.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-MediumItalic.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-SemiBoldItalic.ttf',
+      //       './assets/fonts/Be_Vietnam_Pro/BeVietnamPro-BoldItalic.ttf',
+      //     ],
+      //   },
+      // ],
     ],
     experiments: {
       typedRoutes: true,

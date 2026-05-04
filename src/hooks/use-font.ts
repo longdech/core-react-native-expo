@@ -10,7 +10,9 @@ export const useFont = () => {
   const isEmbedded =
     Platform.OS !== 'web' && !__DEV__ && Constants.executionEnvironment === 'storeClient';
 
-  const [fontsLoaded, fontError] = useFonts(isEmbedded ? {} : { ...FONT_FAMILIES.GoogleSans });
+  const [fontsLoaded, fontError] = useFonts(
+    isEmbedded ? {} : { ...FONT_FAMILIES.GoogleSans, ...FONT_FAMILIES.BeVietnamPro },
+  );
 
   useEffect(() => {
     if (fontsLoaded || fontError || isEmbedded) {

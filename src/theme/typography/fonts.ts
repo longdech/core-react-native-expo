@@ -26,14 +26,24 @@ export const TEXT_SIZES: Record<TextSizeType, number> = {
 
 export const FONT_FAMILIES = {
   GoogleSans: {
-    'GoogleSans-Regular': require('@/assets/fonts/Google_Sans/static/GoogleSans-Regular.ttf'),
-    'GoogleSans-Italic': require('@/assets/fonts/Google_Sans/static/GoogleSans-Italic.ttf'),
-    'GoogleSans-Medium': require('@/assets/fonts/Google_Sans/static/GoogleSans-Medium.ttf'),
-    'GoogleSans-MediumItalic': require('@/assets/fonts/Google_Sans/static/GoogleSans-MediumItalic.ttf'),
-    'GoogleSans-SemiBold': require('@/assets/fonts/Google_Sans/static/GoogleSans-SemiBold.ttf'),
-    'GoogleSans-SemiBoldItalic': require('@/assets/fonts/Google_Sans/static/GoogleSans-SemiBoldItalic.ttf'),
-    'GoogleSans-Bold': require('@/assets/fonts/Google_Sans/static/GoogleSans-Bold.ttf'),
-    'GoogleSans-BoldItalic': require('@/assets/fonts/Google_Sans/static/GoogleSans-BoldItalic.ttf'),
+    'GoogleSans-Regular': require('@/assets/fonts/Google_Sans/GoogleSans-Regular.ttf'),
+    'GoogleSans-Italic': require('@/assets/fonts/Google_Sans/GoogleSans-Italic.ttf'),
+    'GoogleSans-Medium': require('@/assets/fonts/Google_Sans/GoogleSans-Medium.ttf'),
+    'GoogleSans-MediumItalic': require('@/assets/fonts/Google_Sans/GoogleSans-MediumItalic.ttf'),
+    'GoogleSans-SemiBold': require('@/assets/fonts/Google_Sans/GoogleSans-SemiBold.ttf'),
+    'GoogleSans-SemiBoldItalic': require('@/assets/fonts/Google_Sans/GoogleSans-SemiBoldItalic.ttf'),
+    'GoogleSans-Bold': require('@/assets/fonts/Google_Sans/GoogleSans-Bold.ttf'),
+    'GoogleSans-BoldItalic': require('@/assets/fonts/Google_Sans/GoogleSans-BoldItalic.ttf'),
+  },
+  BeVietnamPro: {
+    'BeVietnamPro-Regular': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Regular.ttf'),
+    'BeVietnamPro-Italic': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Italic.ttf'),
+    'BeVietnamPro-Medium': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Medium.ttf'),
+    'BeVietnamPro-MediumItalic': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-MediumItalic.ttf'),
+    'BeVietnamPro-SemiBold': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-SemiBold.ttf'),
+    'BeVietnamPro-SemiBoldItalic': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-SemiBoldItalic.ttf'),
+    'BeVietnamPro-Bold': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf'),
+    'BeVietnamPro-BoldItalic': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-BoldItalic.ttf'),
   },
 };
 
