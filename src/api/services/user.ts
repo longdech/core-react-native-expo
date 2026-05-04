@@ -1,5 +1,5 @@
-import { createQueryKeys } from '@/external/bridge';
 import { defineService } from '@/api/client';
+import { createQueryKeys } from '@/external/bridge';
 import { User } from '@/types/models/user';
 
 export const userKeys = createQueryKeys('users');

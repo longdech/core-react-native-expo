@@ -1,4 +1,5 @@
 import { Dimensions, PixelRatio, Platform } from 'react-native';
+
 import { BREAKPOINTS, TYPOGRAPHY_SCALE } from '@/theme/tokens/responsive-scale';
 
 /** Luôn đọc kích thước mới (xoay màn hình, split view). */

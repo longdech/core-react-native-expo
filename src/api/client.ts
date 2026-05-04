@@ -1,9 +1,9 @@
 import { ENV } from '@/constants/env';
 import {
+  createQueryClient,
   createServiceProvider,
   HttpClient,
   TokenManager,
-  createQueryClient,
 } from '@/external/bridge';
 
 const tokenManager = new TokenManager({

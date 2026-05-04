@@ -1,9 +1,10 @@
-import { BaseText } from '@/components/ui/Text/core/base-text';
-import { cn } from '@/lib/tailwind';
-import type { FontMetrics } from '@/theme/typography/types';
 import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
 import { Text, type TextProps } from 'react-native';
+
+import { BaseText } from '@/components/ui/Text/core/base-text';
+import { cn } from '@/lib/tailwind';
+import type { FontMetrics } from '@/theme/typography/types';
 
 type NativeTextRest = Omit<TextProps, 'style' | 'className' | 'children'>;
 

@@ -1,22 +1,23 @@
+import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
+import {
+  type StyleProp,
+  Text as RNText,
+  type TextProps as RNTextProps,
+  type TextStyle,
+} from 'react-native';
+
 import { BaseText } from '@/components/ui/Text/core/base-text';
 import { cn } from '@/lib/tailwind';
 import type { TYPOGRAPHY_SCALE } from '@/theme/tokens/responsive-scale';
-import type { TextSizeType } from '@/theme/typography/fonts';
 import type { FontWeightType, TextFontStyleType } from '@/theme/typography/font-tokens';
+import type { TextSizeType } from '@/theme/typography/fonts';
 import {
   googleSansVariantClassName,
   resolveGoogleSansSizeMetrics,
   resolveGoogleSansVariantMetrics,
 } from '@/theme/typography/google-sans-metrics';
 import type { TypographyVariant } from '@/theme/typography/types';
-import type { ReactNode } from 'react';
-import { forwardRef } from 'react';
-import {
-  Text as RNText,
-  type TextProps as RNTextProps,
-  type StyleProp,
-  type TextStyle,
-} from 'react-native';
 
 type ScaleKey = keyof typeof TYPOGRAPHY_SCALE;
 

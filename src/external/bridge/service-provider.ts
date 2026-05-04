@@ -1,91 +1,91 @@
 // service-provider.ts
 import {
-  useMutation,
-  useQuery,
   useInfiniteQuery,
-  useQueryClient,
-  type UseQueryOptions,
   type UseInfiniteQueryOptions,
   type UseInfiniteQueryResult,
-} from "@tanstack/react-query"
+  useMutation,
+  useQuery,
+  useQueryClient,
+  type UseQueryOptions,
+} from '@tanstack/react-query';
 
-import { HttpClient, type HttpQueryParamValue, type HttpQueryParams } from "./http-client"
+import { HttpClient, type HttpQueryParams, type HttpQueryParamValue } from './http-client';
+import { ResponseMapper } from './response-mapper';
 import {
+  type BackendType,
   type Id,
   type InfiniteResponse,
+  type ListResponse,
+  type MappingConfig,
   type MaybeApiResponse,
   type Page,
-  type ListResponse,
   unwrapApiResponse,
-  type BackendType,
-  type MappingConfig,
-} from "./types"
-import { ResponseMapper } from "./response-mapper"
+} from './types';
 
 interface QueryKeys<Params extends Record<string, unknown>> {
-  list: (params?: Params) => readonly unknown[]
-  lists: () => readonly unknown[]
-  infinite: (params?: Params) => readonly unknown[]
-  detail: (id: Id) => readonly unknown[]
+  list: (params?: Params) => readonly unknown[];
+  lists: () => readonly unknown[];
+  infinite: (params?: Params) => readonly unknown[];
+  detail: (id: Id) => readonly unknown[];
 }
 
 interface ServiceProviderOptions<T, C extends Page> {
-  pageParamKey?: string
-  mapInfiniteResponse?: (payload: unknown) => InfiniteResponse<T, C>
-  getNextPageParam?: (lastPage: InfiniteResponse<T, C>) => C | undefined
-  getPreviousPageParam?: (firstPage: InfiniteResponse<T, C>) => C | undefined
-  mapListResponse?: (payload: unknown) => ListResponse<T>
+  pageParamKey?: string;
+  mapInfiniteResponse?: (payload: unknown) => InfiniteResponse<T, C>;
+  getNextPageParam?: (lastPage: InfiniteResponse<T, C>) => C | undefined;
+  getPreviousPageParam?: (firstPage: InfiniteResponse<T, C>) => C | undefined;
+  mapListResponse?: (payload: unknown) => ListResponse<T>;
 
   // Backend configuration
-  backend?: BackendType
-  customMapping?: MappingConfig
+  backend?: BackendType;
+  customMapping?: MappingConfig;
 }
 
 interface InfiniteMapperConfig<T, C extends Page> {
-  itemsPath?: string
-  nextPagePath?: string
-  getNextPage?: (payload: unknown) => C | undefined
+  itemsPath?: string;
+  nextPagePath?: string;
+  getNextPage?: (payload: unknown) => C | undefined;
 }
 
 const getByPath = (input: unknown, path: string): unknown => {
-  return path.split(".").reduce<unknown>((acc, key) => {
-    if (acc && typeof acc === "object" && key in acc) {
-      return (acc as Record<string, unknown>)[key]
+  return path.split('.').reduce<unknown>((acc, key) => {
+    if (acc && typeof acc === 'object' && key in acc) {
+      return (acc as Record<string, unknown>)[key];
     }
 
-    return undefined
-  }, input)
-}
+    return undefined;
+  }, input);
+};
 
 /**
  * Helper map payload backend bất kỳ về InfiniteResponse.
  * Dùng path dạng "data.items", "meta.nextPage", ...
  */
 export function createInfiniteResponseMapper<T, C extends Page = Page>(
-  config: InfiniteMapperConfig<T, C> = {}
+  config: InfiniteMapperConfig<T, C> = {},
 ) {
-  const itemsPath = config.itemsPath ?? "items"
-  const nextPagePath = config.nextPagePath ?? "nextPage"
+  const itemsPath = config.itemsPath ?? 'items';
+  const nextPagePath = config.nextPagePath ?? 'nextPage';
 
   return (payload: unknown): InfiniteResponse<T, C> => {
-    const unwrapped = unwrapApiResponse(payload as MaybeApiResponse<unknown>)
-    const isEnveloped = unwrapped !== payload
+    const unwrapped = unwrapApiResponse(payload as MaybeApiResponse<unknown>);
+    const isEnveloped = unwrapped !== payload;
 
     const mappedItems =
-      getByPath(unwrapped, itemsPath) ?? (isEnveloped ? getByPath(payload, itemsPath) : undefined)
+      getByPath(unwrapped, itemsPath) ?? (isEnveloped ? getByPath(payload, itemsPath) : undefined);
 
     const mappedNextPage = config.getNextPage
       ? config.getNextPage(payload)
       : ((getByPath(unwrapped, nextPagePath) ??
-          (isEnveloped ? getByPath(payload, nextPagePath) : undefined)) as C | undefined)
+          (isEnveloped ? getByPath(payload, nextPagePath) : undefined)) as C | undefined);
 
     return {
       items: Array.isArray(mappedItems) ? (mappedItems as T[]) : [],
       nextCursor: mappedNextPage,
       previousCursor: undefined,
       meta: { hasNextPage: !!mappedNextPage, hasPreviousPage: false },
-    }
-  }
+    };
+  };
 }
 
 // ============ GLOBAL BACKEND CONFIG ============
@@ -93,14 +93,14 @@ export function createInfiniteResponseMapper<T, C extends Page = Page>(
 /**
  * Default backend for response mapping when no config provided
  */
-const DEFAULT_BACKEND: BackendType = "nestjs"
+const DEFAULT_BACKEND: BackendType = 'nestjs';
 
 let globalBackendConfig: {
-  backend?: BackendType
-  customMapping?: MappingConfig
+  backend?: BackendType;
+  customMapping?: MappingConfig;
 } = {
   backend: DEFAULT_BACKEND,
-}
+};
 
 /**
  * Set global backend configuration for all services
@@ -109,17 +109,17 @@ let globalBackendConfig: {
  * setGlobalBackendConfig({ customMapping: { listDataPath: "items" } })
  */
 export function setGlobalBackendConfig(config: {
-  backend?: BackendType
-  customMapping?: MappingConfig
+  backend?: BackendType;
+  customMapping?: MappingConfig;
 }) {
-  globalBackendConfig = { ...globalBackendConfig, ...config }
+  globalBackendConfig = { ...globalBackendConfig, ...config };
 }
 
 /**
  * Get current global backend config
  */
 export function getGlobalBackendConfig() {
-  return { ...globalBackendConfig }
+  return { ...globalBackendConfig };
 }
 
 // ============ CREATE SERVICE PROVIDER ============
@@ -131,59 +131,59 @@ export function getGlobalBackendConfig() {
  */
 export function createServiceProvider(
   client: HttpClient,
-  globalOptions?: { backend?: BackendType; customMapping?: MappingConfig }
+  globalOptions?: { backend?: BackendType; customMapping?: MappingConfig },
 ) {
   // Merge global configs
-  const finalGlobalConfig = { ...globalBackendConfig, ...globalOptions }
+  const finalGlobalConfig = { ...globalBackendConfig, ...globalOptions };
 
   const toRequestParams = (params?: Record<string, unknown>): HttpQueryParams | undefined =>
-    params as HttpQueryParams | undefined
+    params as HttpQueryParams | undefined;
 
   return function defineService<
     T extends { id: Id },
     Params extends Record<string, unknown> = {},
     C extends Page = Page,
   >(baseUrl: string, keys: QueryKeys<Params>, options?: ServiceProviderOptions<T, C>) {
-    const pageParamKey = options?.pageParamKey ?? "page"
+    const pageParamKey = options?.pageParamKey ?? 'page';
 
     // Determine mapper config priority: options > global > default
-    let mapperConfig: MappingConfig | BackendType | null = null
+    let mapperConfig: MappingConfig | BackendType | null = null;
 
     if (options?.customMapping) {
-      mapperConfig = options.customMapping
+      mapperConfig = options.customMapping;
     } else if (options?.backend) {
-      mapperConfig = options.backend
+      mapperConfig = options.backend;
     } else if (finalGlobalConfig.customMapping) {
-      mapperConfig = finalGlobalConfig.customMapping
+      mapperConfig = finalGlobalConfig.customMapping;
     } else if (finalGlobalConfig.backend) {
-      mapperConfig = finalGlobalConfig.backend
+      mapperConfig = finalGlobalConfig.backend;
     } else {
-      mapperConfig = DEFAULT_BACKEND
+      mapperConfig = DEFAULT_BACKEND;
     }
 
     // Create response mapper
-    const responseMapper = new ResponseMapper(mapperConfig)
+    const responseMapper = new ResponseMapper(mapperConfig);
 
     const mapInfiniteResponse =
       options?.mapInfiniteResponse ??
       ((payload: unknown) => {
-        return responseMapper.mapInfinite<T, C>(payload)
-      })
+        return responseMapper.mapInfinite<T, C>(payload);
+      });
 
     const getNextPageParam =
       options?.getNextPageParam ??
-      ((lastPage: InfiniteResponse<T, C>) => lastPage.nextCursor ?? undefined)
+      ((lastPage: InfiniteResponse<T, C>) => lastPage.nextCursor ?? undefined);
 
     const api = {
       list: (params?: Params): Promise<ListResponse<T>> => {
-        const requestPromise = client.get<unknown>(baseUrl, toRequestParams(params))
+        const requestPromise = client.get<unknown>(baseUrl, toRequestParams(params));
 
         if (options?.mapListResponse) {
-          return requestPromise.then(options.mapListResponse)
+          return requestPromise.then(options.mapListResponse);
         }
 
         // Use responseMapper by default
-        return requestPromise.then((payload) => responseMapper.mapList<T>(payload))
+        return requestPromise.then((payload) => responseMapper.mapList<T>(payload));
       },
 
       infinite: (params?: Params, page?: C) =>
@@ -199,18 +199,18 @@ export function createServiceProvider(
       update: (id: Id, data: Partial<T>) => client.put<T>(`${baseUrl}/${id}`, data),
 
       remove: (id: Id) => client.delete<void>(`${baseUrl}/${id}`),
-    }
+    };
 
     const hooks = {
       useList(
         params?: Params,
-        options?: Omit<UseQueryOptions<ListResponse<T>, Error>, "queryKey" | "queryFn">
+        options?: Omit<UseQueryOptions<ListResponse<T>, Error>, 'queryKey' | 'queryFn'>,
       ) {
         return useQuery({
           queryKey: keys.list(params),
           queryFn: () => api.list(params),
           ...options,
-        })
+        });
       },
 
       useInfinite(
@@ -223,17 +223,17 @@ export function createServiceProvider(
             ReturnType<typeof keys.infinite>,
             C | undefined
           >,
-          "queryKey" | "queryFn" | "initialPageParam"
-        >
+          'queryKey' | 'queryFn' | 'initialPageParam'
+        >,
       ): UseInfiniteQueryResult<InfiniteResponse<T, C>, Error> & {
-        data: { pages: InfiniteResponse<T, C>[]; pageParams: C[] } | undefined
+        data: { pages: InfiniteResponse<T, C>[]; pageParams: C[] } | undefined;
       } {
         const result = useInfiniteQuery({
           queryKey: keys.infinite(params),
 
           queryFn: async ({ pageParam }) => {
-            const payload = await api.infinite(params, pageParam as C | undefined)
-            return mapInfiniteResponse(payload)
+            const payload = await api.infinite(params, pageParam as C | undefined);
+            return mapInfiniteResponse(payload);
           },
 
           initialPageParam: undefined as C | undefined,
@@ -242,24 +242,24 @@ export function createServiceProvider(
           getPreviousPageParam: options?.getPreviousPageParam,
 
           ...options,
-        })
+        });
 
         return result as UseInfiniteQueryResult<InfiniteResponse<T, C>, Error> & {
-          data: { pages: InfiniteResponse<T, C>[]; pageParams: C[] } | undefined
-        }
+          data: { pages: InfiniteResponse<T, C>[]; pageParams: C[] } | undefined;
+        };
       },
 
-      useDetail(id: Id, options?: Omit<UseQueryOptions<T, Error>, "queryKey" | "queryFn">) {
+      useDetail(id: Id, options?: Omit<UseQueryOptions<T, Error>, 'queryKey' | 'queryFn'>) {
         return useQuery({
           queryKey: keys.detail(id),
           queryFn: () => api.detail(id),
           enabled: id !== undefined && id !== null,
           ...options,
-        })
+        });
       },
 
       useCreate() {
-        const qc = useQueryClient()
+        const qc = useQueryClient();
 
         return useMutation({
           mutationFn: api.create,
@@ -267,13 +267,13 @@ export function createServiceProvider(
           onSuccess: () => {
             qc.invalidateQueries({
               queryKey: keys.lists(),
-            })
+            });
           },
-        })
+        });
       },
 
       useUpdate() {
-        const qc = useQueryClient()
+        const qc = useQueryClient();
 
         return useMutation({
           mutationFn: ({ id, data }: { id: Id; data: Partial<T> }) => api.update(id, data),
@@ -281,17 +281,17 @@ export function createServiceProvider(
           onSuccess: (_, vars) => {
             qc.invalidateQueries({
               queryKey: keys.detail(vars.id),
-            })
+            });
 
             qc.invalidateQueries({
               queryKey: keys.lists(),
-            })
+            });
           },
-        })
+        });
       },
 
       useDelete() {
-        const qc = useQueryClient()
+        const qc = useQueryClient();
 
         return useMutation({
           mutationFn: api.remove,
@@ -299,16 +299,16 @@ export function createServiceProvider(
           onSuccess: (_, id) => {
             qc.invalidateQueries({
               queryKey: keys.lists(),
-            })
+            });
 
             qc.removeQueries({
               queryKey: keys.detail(id),
-            })
+            });
           },
-        })
+        });
       },
-    }
+    };
 
-    return { api, hooks }
-  }
+    return { api, hooks };
+  };
 }

@@ -1,5 +1,5 @@
 /** Màu + biến NativeWind. */
-export { COLORS, type ColorSchemeType, type ColorScheme } from '@/theme/colors';
+export { COLORS, type ColorScheme, type ColorSchemeType } from '@/theme/colors';
 export { THEMES } from '@/theme/nativewind-vars';
 
 /** Breakpoint + thang responsive chữ (dùng trong `lib/responsive`). */

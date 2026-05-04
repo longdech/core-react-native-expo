@@ -1,3 +1,6 @@
+import 'react-native-reanimated';
+import './global.css';
+
 import {
   DarkTheme,
   DefaultTheme,
@@ -5,12 +8,11 @@ import {
 } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import 'react-native-reanimated';
-import './global.css';
-import { useTheme } from '@/hooks/use-theme';
+
 import { AppProvider } from '@/components/providers/app-provider';
 import { useAuth } from '@/hooks/use-auth';
 import { useFont } from '@/hooks/use-font';
+import { useTheme } from '@/hooks/use-theme';
 
 export { ErrorBoundary } from 'expo-router';
 

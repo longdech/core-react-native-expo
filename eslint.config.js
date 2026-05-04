@@ -1,9 +1,10 @@
 // https://docs.expo.dev/guides/using-eslint/
 const { defineConfig, globalIgnores } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
+const simpleImportSort = require('eslint-plugin-simple-import-sort');
+const unusedImports = require('eslint-plugin-unused-imports');
 
 module.exports = defineConfig([
-  // 1. Global ignores
   globalIgnores([
     'dist/*',
     'node_modules/',
@@ -19,10 +20,8 @@ module.exports = defineConfig([
     '**/*.svg',
   ]),
 
-  // 2. Config mặc định của Expo
   expoConfig,
 
-  // 3. Custom rules cho các file cụ thể
   {
     files: ['babel.config.js', 'metro.config.js', 'app.config.js'],
     languageOptions: {
@@ -35,14 +34,34 @@ module.exports = defineConfig([
     },
   },
 
-  // 4. Rules bổ sung (nếu cần)
   {
     rules: {
-      // Chỉ giữ các rule về logic, KHÔNG có rule về format
       'no-console': 'warn',
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
+    },
+  },
+
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+      'unused-imports': unusedImports,
+    },
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
     },
   },
 ]);

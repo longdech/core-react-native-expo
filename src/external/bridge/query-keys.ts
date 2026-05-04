@@ -1,5 +1,5 @@
-export type QueryParams = Record<string, unknown>
-type QueryValue = string | number | boolean | QueryValue[] | QueryParams | null | undefined
+export type QueryParams = Record<string, unknown>;
+type QueryValue = string | number | boolean | QueryValue[] | QueryParams | null | undefined;
 
 /**
  * Sort params by key to keep query keys deterministic.
@@ -7,25 +7,25 @@ type QueryValue = string | number | boolean | QueryValue[] | QueryParams | null 
 function stableParams(params: QueryParams) {
   const stableValue = (value: QueryValue): QueryValue => {
     if (Array.isArray(value)) {
-      return value.map((item) => stableValue(item))
+      return value.map((item) => stableValue(item));
     }
 
-    if (value && typeof value === "object") {
-      return stableParams(value as QueryParams)
+    if (value && typeof value === 'object') {
+      return stableParams(value as QueryParams);
     }
 
-    return value
-  }
+    return value;
+  };
 
   return Object.keys(params)
     .sort()
     .reduce((acc, key) => {
-      const value = params[key]
-      if (value === undefined) return acc
+      const value = params[key];
+      if (value === undefined) return acc;
 
-      acc[key] = stableValue(value as QueryValue)
-      return acc
-    }, {} as QueryParams)
+      acc[key] = stableValue(value as QueryValue);
+      return acc;
+    }, {} as QueryParams);
 }
 
 /**
@@ -38,18 +38,18 @@ export function createQueryKeys<const T extends string>(scope: T) {
 
     all: [scope] as const,
 
-    lists: () => [scope, "list"] as const,
+    lists: () => [scope, 'list'] as const,
 
     list: (params?: QueryParams) =>
-      params ? ([scope, "list", stableParams(params)] as const) : ([scope, "list"] as const),
+      params ? ([scope, 'list', stableParams(params)] as const) : ([scope, 'list'] as const),
 
     infinite: (params?: QueryParams) =>
       params
-        ? ([scope, "infinite", stableParams(params)] as const)
-        : ([scope, "infinite"] as const),
+        ? ([scope, 'infinite', stableParams(params)] as const)
+        : ([scope, 'infinite'] as const),
 
-    details: () => [scope, "detail"] as const,
+    details: () => [scope, 'detail'] as const,
 
-    detail: (id: string | number) => [scope, "detail", id] as const,
-  }
+    detail: (id: string | number) => [scope, 'detail', id] as const,
+  };
 }

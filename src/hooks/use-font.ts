@@ -1,8 +1,9 @@
+import Constants from 'expo-constants';
 import { useFonts } from 'expo-font';
-import { Platform } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import Constants from 'expo-constants';
+import { Platform } from 'react-native';
+
 import { FONT_FAMILIES } from '@/theme';
 
 export const useFont = () => {

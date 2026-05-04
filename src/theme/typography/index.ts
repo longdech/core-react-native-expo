@@ -1,21 +1,21 @@
-export type { FontMetrics, TypographyVariant } from '@/theme/typography/types';
 export {
-  TEXT_SIZES,
-  FONT_FAMILIES,
-  type TextSizeType,
-  type FontFamilyType,
-  type FontFamily,
-} from '@/theme/typography/fonts';
-export {
+  type FontWeightType,
   getFontFamily,
   getFontSize,
-  type FontWeightType,
   type TextFontStyleType,
 } from '@/theme/typography/font-tokens';
 export {
-  resolveGoogleSansVariantMetrics,
-  resolveGoogleSansSizeMetrics,
+  FONT_FAMILIES,
+  type FontFamily,
+  type FontFamilyType,
+  TEXT_SIZES,
+  type TextSizeType,
+} from '@/theme/typography/fonts';
+export {
   getGoogleSansThemeMetrics,
   googleSansVariantClassName,
+  resolveGoogleSansSizeMetrics,
+  resolveGoogleSansVariantMetrics,
 } from '@/theme/typography/google-sans-metrics';
-export { typography, type ThemeTypographyKey } from '@/theme/typography/presets';
+export { type ThemeTypographyKey, typography } from '@/theme/typography/presets';
+export type { FontMetrics, TypographyVariant } from '@/theme/typography/types';

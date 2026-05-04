@@ -1,18 +1,19 @@
-import { useAuth } from '@/hooks/use-auth';
-import { useTheme } from '@/hooks/use-theme';
-import { cn } from '@/lib/tailwind';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
   ActivityIndicator,
   Alert,
+  Pressable,
   ScrollView,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { useAuth } from '@/hooks/use-auth';
+import { useTheme } from '@/hooks/use-theme';
+import { cn } from '@/lib/tailwind';
 
 export default function VerifyEmailScreen() {
   const [code, setCode] = useState('');

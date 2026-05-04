@@ -1,7 +1,8 @@
-import { GoogleSansText } from '@/components/ui/Text';
 import { Link } from 'expo-router';
-import { View, Button } from 'react-native';
+import { Button, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { GoogleSansText } from '@/components/ui/Text';
 
 export default function WelcomeScreen() {
   return (

@@ -1,10 +1,7 @@
-import { createContext, type ReactNode, useState } from 'react';
-
-import { View } from 'react-native';
-
 import { StatusBar } from 'expo-status-bar';
-
 import { colorScheme } from 'nativewind';
+import { createContext, type ReactNode, useState } from 'react';
+import { View } from 'react-native';
 
 import { COLORS, type ColorScheme, THEMES } from '@/theme';
 

@@ -1,4 +1,4 @@
-import { QueryClient, type QueryClientConfig } from "@tanstack/react-query"
+import { QueryClient, type QueryClientConfig } from '@tanstack/react-query';
 
 /**
  * Default QueryClient config:
@@ -17,7 +17,7 @@ const defaultConfig: QueryClientConfig = {
       retry: 0,
     },
   },
-}
+};
 
 /**
  * Create QueryClient với config có thể override
@@ -36,10 +36,10 @@ export function createQueryClient(config?: QueryClientConfig): QueryClient {
         ...config?.defaultOptions?.mutations,
       },
     },
-  })
+  });
 }
 
 /**
  * Shared QueryClient instance cho app
  */
-export const queryClient = createQueryClient()
+export const queryClient = createQueryClient();

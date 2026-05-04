@@ -3,13 +3,13 @@ export { createFontMetricsText } from '@/components/ui/Text/core/create-font-met
 export { GoogleSansText, type GoogleSansTextProps } from '@/components/ui/Text/fonts/google-sans';
 export type {
   FontMetrics,
-  TypographyVariant,
   FontWeightType,
   TextFontStyleType,
+  TypographyVariant,
 } from '@/theme/typography';
 export {
   getFontFamily,
   getFontSize,
-  resolveGoogleSansVariantMetrics,
   resolveGoogleSansSizeMetrics,
+  resolveGoogleSansVariantMetrics,
 } from '@/theme/typography';

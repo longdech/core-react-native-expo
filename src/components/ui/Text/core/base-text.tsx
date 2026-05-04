@@ -1,12 +1,13 @@
-import { cn } from '@/lib/tailwind';
-import type { FontMetrics } from '@/theme/typography/types';
 import { forwardRef } from 'react';
 import {
+  type StyleProp,
   Text as RNText,
   type TextProps as RNTextProps,
-  type StyleProp,
   type TextStyle,
 } from 'react-native';
+
+import { cn } from '@/lib/tailwind';
+import type { FontMetrics } from '@/theme/typography/types';
 
 export type BaseTextProps = Omit<RNTextProps, 'style' | 'className'> & {
   /** fontSize, fontFamily, lineHeight, … — từ `@/theme/typography`. */
@@ -23,7 +24,5 @@ export const BaseText = forwardRef<RNText, BaseTextProps>(function BaseText(
   { fontMetrics, className, style, ...rest },
   ref,
 ) {
-  return (
-    <RNText ref={ref} className={cn(className)} style={[fontMetrics, style]} {...rest} />
-  );
+  return <RNText ref={ref} className={cn(className)} style={[fontMetrics, style]} {...rest} />;
 });
