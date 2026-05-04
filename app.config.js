@@ -31,7 +31,25 @@ module.exports = ({ config }) => {
       output: 'static',
       favicon: './src/assets/images/favicon.png',
     },
-    plugins: ['expo-router'],
+    plugins: [
+      'expo-router',
+      // TODO: Uncomment this when we have the font files for production build
+      // [
+      //   "expo-font",
+      //   {
+      //     "fonts": [
+      //       "./assets/fonts/google-sans/static/GoogleSans-Regular.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-Medium.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-SemiBold.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-Bold.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-Italic.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-MediumItalic.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-SemiBoldItalic.ttf",
+      //       "./assets/fonts/google-sans/static/GoogleSans-BoldItalic.ttf"
+      //     ]
+      //   }
+      // ]
+    ],
     experiments: {
       typedRoutes: true,
     },
