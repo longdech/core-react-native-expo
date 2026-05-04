@@ -1,9 +1,9 @@
 import { vars } from 'nativewind';
-import Colors from '@/constants/Colors';
+import { COLORS, ColorSchemeType } from '@/constants/Colors';
 
-const { light, dark } = Colors;
+const { light, dark } = COLORS;
 
-export const themes = {
+export const THEMES: Record<ColorSchemeType, ReturnType<typeof vars>> = {
   light: vars({
     '--color-background': light.background,
     '--color-foreground': light.foreground,

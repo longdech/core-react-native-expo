@@ -24,7 +24,10 @@ const validator = (env: Record<string, unknown>) => {
 /**
  * Environment variables
  */
-export const Env = validator({
+export const ENV = validator({
   appMode: process.env.EXPO_PUBLIC_APP_MODE,
   apiUrl: process.env.EXPO_PUBLIC_API_URL,
 });
+
+export type EnvType = z.infer<typeof EnvSchema>;
+export default ENV;

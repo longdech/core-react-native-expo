@@ -1,4 +1,4 @@
-export default {
+export const COLORS = {
   light: {
     background: '#ffffff',
     foreground: '#242528',
@@ -66,3 +66,9 @@ export default {
     sidebarRing: '#8a919e',
   },
 };
+
+export type ColorSchemeType = keyof typeof COLORS;
+export type ColorScheme = ColorSchemeType extends keyof typeof COLORS
+  ? (typeof COLORS)[ColorSchemeType]
+  : never;
+export default COLORS;

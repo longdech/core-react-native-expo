@@ -1,4 +1,4 @@
-export const styles = {
+export const STYLES = {
   borderRadius: {
     sm: 6,
     md: 8,
@@ -21,3 +21,9 @@ export const styles = {
     '5xl': ['48px', { lineHeight: '64px' }],
   },
 };
+
+export type FontSizeType = keyof typeof STYLES.fontSize;
+export type FontSize = FontSizeType extends keyof typeof STYLES.fontSize
+  ? (typeof STYLES.fontSize)[FontSizeType]
+  : never;
+export default STYLES;

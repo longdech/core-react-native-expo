@@ -6,8 +6,8 @@ import { StatusBar } from 'expo-status-bar';
 
 import { colorScheme } from 'nativewind';
 
-import Colors from '@/constants/Colors';
-import { themes } from '@/lib/themes';
+import { COLORS, ColorScheme } from '@/constants/Colors';
+import { THEMES } from '@/lib/themes';
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -16,14 +16,14 @@ interface ThemeProviderProps {
 export type ThemeContextType = {
   theme: 'light' | 'dark';
   isDark: boolean;
-  colors: typeof Colors.light;
+  colors: ColorScheme;
   toggleTheme: () => void;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
   isDark: false,
-  colors: Colors.light,
+  colors: COLORS.light,
   toggleTheme: () => {},
 });
 
@@ -41,12 +41,12 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       value={{
         theme: currentTheme,
         isDark: currentTheme === 'dark',
-        colors: Colors[currentTheme],
+        colors: COLORS[currentTheme],
         toggleTheme,
       }}
     >
       <StatusBar style={currentTheme === 'dark' ? 'light' : 'dark'} />
-      <View style={themes[currentTheme]} className="flex-1">
+      <View style={THEMES[currentTheme]} className="flex-1">
         {children}
       </View>
     </ThemeContext.Provider>
