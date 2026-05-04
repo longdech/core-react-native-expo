@@ -4,14 +4,16 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { Platform } from 'react-native';
 
-import { FONT_FAMILIES } from '@/theme';
+import { FONT_FAMILIES } from '@/theme/typography/fonts';
 
 export const useFont = () => {
   const isEmbedded =
     Platform.OS !== 'web' && !__DEV__ && Constants.executionEnvironment === 'storeClient';
 
   const [fontsLoaded, fontError] = useFonts(
-    isEmbedded ? {} : { ...FONT_FAMILIES.GoogleSans, ...FONT_FAMILIES.BeVietnamPro },
+    isEmbedded
+      ? {}
+      : { ...FONT_FAMILIES.Roboto, ...FONT_FAMILIES.GoogleSans, ...FONT_FAMILIES.BeVietnamPro },
   );
 
   useEffect(() => {

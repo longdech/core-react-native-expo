@@ -6,7 +6,7 @@ import {
   getFontSize,
   type TextFontStyleType,
 } from '@/theme/typography/font-tokens';
-import type { TextSizeType } from '@/theme/typography/fonts';
+import { FontFamilyType, TEXT_SIZES, type TextSizeType } from '@/theme/typography/fonts';
 import type { FontMetrics, TypographyVariant } from '@/theme/typography/types';
 
 type ScaleKey = keyof typeof TYPOGRAPHY_SCALE;
@@ -28,27 +28,29 @@ const variantConfig: Record<
   TypographyVariant,
   { baseSize: number; responsiveType: ScaleKey; weight: FontWeightType }
 > = {
-  display: { baseSize: 48, responsiveType: 'DISPLAY', weight: 'Bold' },
-  h1: { baseSize: 32, responsiveType: 'DISPLAY', weight: 'Bold' },
-  h2: { baseSize: 24, responsiveType: 'CONTENT', weight: 'SemiBold' },
-  h3: { baseSize: 20, responsiveType: 'CONTENT', weight: 'SemiBold' },
-  body: { baseSize: 16, responsiveType: 'CONTENT', weight: 'Regular' },
-  caption: { baseSize: 12, responsiveType: 'UI', weight: 'Regular' },
-  button: { baseSize: 16, responsiveType: 'TOUCH', weight: 'SemiBold' },
-  input: { baseSize: 16, responsiveType: 'UI', weight: 'Regular' },
+  display: { baseSize: TEXT_SIZES['5xl'], responsiveType: 'DISPLAY', weight: 'Bold' },
+  h1: { baseSize: TEXT_SIZES['4xl'], responsiveType: 'DISPLAY', weight: 'Bold' },
+  h2: { baseSize: TEXT_SIZES['3xl'], responsiveType: 'CONTENT', weight: 'SemiBold' },
+  h3: { baseSize: TEXT_SIZES['2xl'], responsiveType: 'CONTENT', weight: 'SemiBold' },
+  body: { baseSize: TEXT_SIZES['base'], responsiveType: 'CONTENT', weight: 'Regular' },
+  caption: { baseSize: TEXT_SIZES['xs'], responsiveType: 'UI', weight: 'Regular' },
+  button: { baseSize: TEXT_SIZES['sm'], responsiveType: 'TOUCH', weight: 'SemiBold' },
+  input: { baseSize: TEXT_SIZES['sm'], responsiveType: 'UI', weight: 'Regular' },
 };
 
 /** Preset NativeWind theo variant (không dùng cho font metrics). */
-export const googleSansVariantClassName: Partial<Record<TypographyVariant, string>> = {
+export const fontVariantClassName: Partial<Record<TypographyVariant, string>> = {
   // button: 'text-center uppercase',
 };
 
-export function resolveGoogleSansVariantMetrics({
+export function resolveFontVariantMetrics({
+  fontFamily,
   variant,
   weight,
   fontStyle = 'normal',
   responsiveType,
 }: {
+  fontFamily: FontFamilyType;
   variant: TypographyVariant;
   weight?: FontWeightType;
   fontStyle?: TextFontStyleType;
@@ -57,13 +59,13 @@ export function resolveGoogleSansVariantMetrics({
   const cfg = variantConfig[variant];
   const scaleType = responsiveType ?? cfg.responsiveType;
   const resolvedWeight = weight ?? cfg.weight;
-  const fontFamily = getFontFamily({
-    fontFamily: 'GoogleSans',
+  const resolvedFontFamily = getFontFamily({
+    fontFamily,
     fontStyle,
     weight: resolvedWeight,
   });
   const fontSize = responsiveFontSize(cfg.baseSize, scaleType);
-  const metrics: FontMetrics = { fontFamily, fontSize };
+  const metrics: FontMetrics = { fontFamily: resolvedFontFamily, fontSize };
   if (variant === 'body') {
     metrics.lineHeight = responsiveFontSize(24, scaleType);
   }
@@ -73,12 +75,14 @@ export function resolveGoogleSansVariantMetrics({
   return metrics;
 }
 
-export function resolveGoogleSansSizeMetrics({
+export function resolveFontSizeMetrics({
+  fontFamily,
   size,
   weight = 'Regular',
   fontStyle = 'normal',
   responsiveType,
 }: {
+  fontFamily: FontFamilyType;
   size: TextSizeType;
   weight?: FontWeightType;
   fontStyle?: TextFontStyleType;
@@ -86,11 +90,7 @@ export function resolveGoogleSansSizeMetrics({
 }): FontMetrics {
   const scaleType = responsiveType ?? SIZE_TO_SCALE[size];
   return {
-    fontFamily: getFontFamily({ fontFamily: 'GoogleSans', fontStyle, weight }),
+    fontFamily: getFontFamily({ fontFamily, fontStyle, weight }),
     fontSize: responsiveFontSize(getFontSize(size), scaleType),
   };
-}
-
-export function getGoogleSansThemeMetrics(variant: TypographyVariant): FontMetrics {
-  return resolveGoogleSansVariantMetrics({ variant });
 }

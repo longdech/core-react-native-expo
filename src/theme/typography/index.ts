@@ -1,9 +1,8 @@
 export {
-  beVietnamProVariantClassName,
-  getBeVietnamProThemeMetrics,
-  resolveBeVietnamProSizeMetrics,
-  resolveBeVietnamProVariantMetrics,
-} from '@/theme/typography/be-vietnam-pro-metrics';
+  fontVariantClassName,
+  resolveFontSizeMetrics,
+  resolveFontVariantMetrics,
+} from '@/theme/typography/font-metrics';
 export {
   type FontWeightType,
   getFontFamily,
@@ -17,11 +16,4 @@ export {
   TEXT_SIZES,
   type TextSizeType,
 } from '@/theme/typography/fonts';
-export {
-  getGoogleSansThemeMetrics,
-  googleSansVariantClassName,
-  resolveGoogleSansSizeMetrics,
-  resolveGoogleSansVariantMetrics,
-} from '@/theme/typography/google-sans-metrics';
-export { type ThemeTypographyKey, typography } from '@/theme/typography/presets';
 export type { FontMetrics, TypographyVariant } from '@/theme/typography/types';

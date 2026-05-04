@@ -7,21 +7,22 @@ import {
   type TextStyle,
 } from 'react-native';
 
-import { BaseText } from '@/components/ui/Text/core/base-text';
+import { BaseText } from '@/components/ui/Text/base-text';
 import { cn } from '@/lib/tailwind';
 import type { TYPOGRAPHY_SCALE } from '@/theme/tokens/responsive-scale';
-import type { FontWeightType, TextFontStyleType } from '@/theme/typography/font-tokens';
-import type { TextSizeType } from '@/theme/typography/fonts';
 import {
-  googleSansVariantClassName,
-  resolveGoogleSansSizeMetrics,
-  resolveGoogleSansVariantMetrics,
-} from '@/theme/typography/google-sans-metrics';
+  fontVariantClassName,
+  resolveFontSizeMetrics,
+  resolveFontVariantMetrics,
+} from '@/theme/typography/font-metrics';
+import type { FontWeightType, TextFontStyleType } from '@/theme/typography/font-tokens';
+import type { FontFamilyType, TextSizeType } from '@/theme/typography/fonts';
 import type { TypographyVariant } from '@/theme/typography/types';
 
 type ScaleKey = keyof typeof TYPOGRAPHY_SCALE;
 
-export type GoogleSansTextProps = Omit<RNTextProps, 'children' | 'style' | 'className'> & {
+export type TextProps = Omit<RNTextProps, 'children' | 'style' | 'className'> & {
+  fontFamily?: FontFamilyType;
   className?: string;
   style?: StyleProp<TextStyle>;
   weight?: FontWeightType;
@@ -35,10 +36,11 @@ export type GoogleSansTextProps = Omit<RNTextProps, 'children' | 'style' | 'clas
 };
 
 /**
- * Google Sans: metrics từ `@/theme/typography`, màu / layout / transform qua `className` (NativeWind).
+ * Text: metrics từ `@/theme/typography`, màu / layout / transform qua `className` (NativeWind).
  */
-export const GoogleSansText = forwardRef<RNText, GoogleSansTextProps>(function GoogleSansText(
+export const Text = forwardRef<RNText, TextProps>(function Text(
   {
+    fontFamily = 'Roboto',
     weight = 'Regular',
     fontStyle = 'normal',
     style,
@@ -53,20 +55,22 @@ export const GoogleSansText = forwardRef<RNText, GoogleSansTextProps>(function G
 ) {
   const fontMetrics =
     variant != null
-      ? resolveGoogleSansVariantMetrics({
+      ? resolveFontVariantMetrics({
+          fontFamily,
           variant,
           weight,
           fontStyle,
           responsiveType,
         })
-      : resolveGoogleSansSizeMetrics({
+      : resolveFontSizeMetrics({
+          fontFamily,
           size: size ?? 'base',
           weight,
           fontStyle,
           responsiveType,
         });
 
-  const variantTw = variant != null ? googleSansVariantClassName[variant] : undefined;
+  const variantTw = variant != null ? fontVariantClassName[variant] : undefined;
 
   return (
     <BaseText

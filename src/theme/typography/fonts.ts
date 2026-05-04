@@ -12,16 +12,16 @@ export type TextSizeType =
   | '5xl';
 
 export const TEXT_SIZES: Record<TextSizeType, number> = {
-  xxs: 10,
-  xs: 12,
-  sm: 14,
-  base: 16,
-  lg: 18,
-  xl: 20,
-  '2xl': 24,
-  '3xl': 30,
-  '4xl': 36,
-  '5xl': 48,
+  xxs: 11,
+  xs: 13, // caption
+  sm: 15, // button, input
+  base: 17, // body
+  lg: 19,
+  xl: 21,
+  '2xl': 25, // h3
+  '3xl': 30, // h2
+  '4xl': 36, // h1
+  '5xl': 48, // display
 };
 
 export const FONT_FAMILIES = {
@@ -44,6 +44,16 @@ export const FONT_FAMILIES = {
     'BeVietnamPro-SemiBoldItalic': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-SemiBoldItalic.ttf'),
     'BeVietnamPro-Bold': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf'),
     'BeVietnamPro-BoldItalic': require('@/assets/fonts/Be_Vietnam_Pro/BeVietnamPro-BoldItalic.ttf'),
+  },
+  Roboto: {
+    'Roboto-Regular': require('@/assets/fonts/Roboto/Roboto-Regular.ttf'),
+    'Roboto-Italic': require('@/assets/fonts/Roboto/Roboto-Italic.ttf'),
+    'Roboto-Medium': require('@/assets/fonts/Roboto/Roboto-Medium.ttf'),
+    'Roboto-MediumItalic': require('@/assets/fonts/Roboto/Roboto-MediumItalic.ttf'),
+    'Roboto-SemiBold': require('@/assets/fonts/Roboto/Roboto-SemiBold.ttf'),
+    'Roboto-SemiBoldItalic': require('@/assets/fonts/Roboto/Roboto-SemiBoldItalic.ttf'),
+    'Roboto-Bold': require('@/assets/fonts/Roboto/Roboto-Bold.ttf'),
+    'Roboto-BoldItalic': require('@/assets/fonts/Roboto/Roboto-BoldItalic.ttf'),
   },
 };
 
