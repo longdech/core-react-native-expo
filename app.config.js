@@ -1,12 +1,12 @@
 module.exports = ({ config }) => {
   return {
     ...config,
-    name: 'mobile',
-    slug: 'mobile',
+    name: 'Core Expo',
+    slug: 'core-react-native-expo',
     version: '1.0.0',
-    orientation: 'all',
+    orientation: 'default', // 'default', 'portrait', 'landscape'
     icon: './src/assets/images/icon.png',
-    scheme: 'mobile',
+    scheme: 'core-react-native-expo',
     userInterfaceStyle: 'automatic',
     newArchEnabled: true,
     splash: {
@@ -16,6 +16,8 @@ module.exports = ({ config }) => {
     },
     ios: {
       supportsTablet: true,
+      bundleIdentifier: 'com.longdech.coreexpo',
+      // googleServicesFile: './GoogleService-Info.plist',
     },
     android: {
       adaptiveIcon: {
@@ -25,6 +27,8 @@ module.exports = ({ config }) => {
       edgeToEdgeEnabled: true,
       predictiveBackGestureEnabled: false,
       softwareKeyboardLayoutMode: 'resize',
+      package: 'com.longdech.coreexpo',
+      googleServicesFile: './google-services.json',
     },
     web: {
       bundler: 'metro',
@@ -65,9 +69,23 @@ module.exports = ({ config }) => {
       //     ],
       //   },
       // ],
+      [
+        'expo-notifications',
+        {
+          icon: './src/assets/images/notification-icon.png',
+          color: '#ffffff',
+          defaultChannel: 'default',
+          // enableBackgroundRemoteNotifications: true,
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,
+    },
+    extra: {
+      eas: {
+        projectId: '4b10bd6e-9280-4a65-b3a8-ee0b114cbb4e',
+      },
     },
   };
 };

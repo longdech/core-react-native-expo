@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "349098714582",
+    "project_id": "core-react-native-expo",
+    "storage_bucket": "core-react-native-expo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349098714582:android:67e5c6a0f82cec85a87077",
+        "android_client_info": {
+          "package_name": "com.longdech.coreexpo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjHHKNTBXOV8mY6iPN7ReW3z04gSYNV78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

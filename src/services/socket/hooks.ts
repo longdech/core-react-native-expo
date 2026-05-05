@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 
+import { devLog } from '@/utils/devLog';
+
 import { socketClient } from './client';
 import { ClientToServerEvents, ServerToClientEvents } from './events';
 
@@ -31,19 +33,14 @@ export const useSocketEvent = <K extends keyof ServerToClientEvents>(
   }, [event]);
 };
 
-// Hook: Emit socket events (type-safe)
+// Hook: Emit socket events (type-safe); queues until connected when offline.
 export const useSocketEmit = () => {
   const emit = useCallback(
     <K extends keyof ClientToServerEvents>(
       event: K,
       ...args: Parameters<ClientToServerEvents[K]>
     ) => {
-      const socket = socketClient.getSocket();
-      if (socketClient.isSocketConnected()) {
-        socket.emit(event, ...args);
-      } else {
-        console.warn(`⚠️ Socket not connected, cannot emit: ${event}`);
-      }
+      socketClient.emitOrQueue(event, ...args);
     },
     [],
   );
@@ -62,19 +59,16 @@ export const useSocketConnection = () => {
     const onConnect = () => {
       setIsConnected(true);
       setSocketId(socket.id || null);
-      console.log('✅ Socket connected in hook');
     };
 
     const onDisconnect = () => {
       setIsConnected(false);
       setSocketId(null);
-      console.log('❌ Socket disconnected in hook');
     };
 
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
 
-    // Check current status
     setIsConnected(socketClient.isSocketConnected());
     setSocketId(socket.id || null);
 
@@ -90,19 +84,18 @@ export const useSocketConnection = () => {
 // Hook: Handle app state changes (background/foreground)
 export const useSocketAppState = () => {
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', (nextAppState: AppStateStatus) => {
-      if (nextAppState === 'active') {
-        // App comes to foreground - reconnect if needed
-        if (!socketClient.isSocketConnected()) {
-          console.log('🔄 App foreground, reconnecting socket...');
-          socketClient.reconnect();
-        }
-      } else if (nextAppState === 'background') {
-        // App goes to background - optional: disconnect to save battery
-        // But keep connection for push notifications
-        console.log('📱 App background, socket stays connected');
+    const apply = (state: AppStateStatus) => {
+      const active = state === 'active';
+      socketClient.setAppInForeground(active);
+      if (active && !socketClient.isSocketConnected()) {
+        devLog('socket', 'foreground → reconnect');
+        socketClient.reconnect();
       }
-    });
+    };
+
+    apply(AppState.currentState);
+
+    const subscription = AppState.addEventListener('change', apply);
 
     return () => subscription.remove();
   }, []);

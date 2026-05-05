@@ -48,6 +48,9 @@ export default function WelcomeScreen() {
           <Link href="/sign-in" asChild>
             <Button title="Sign In" />
           </Link>
+          <Link href="/notifications-test" asChild>
+            <Button title="Notifications Test" />
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>
