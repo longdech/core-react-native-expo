@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAuth } from '@/hooks/use-auth';
 import { useTheme } from '@/hooks/use-theme';
-import { cn } from '@/lib/tailwind';
+import { cn } from '@/utils/tailwind';
 
 export default function TabProfileScreen() {
   const { logout, isPending } = useAuth();
@@ -21,7 +21,7 @@ export default function TabProfileScreen() {
           disabled={isPending}
         >
           {isPending && <ActivityIndicator size="small" color={colors.primaryForeground} />}
-          <Text className="text-primary-foreground text-center text-sm">
+          <Text className="text-center text-sm text-primary-foreground">
             {isPending ? 'Logging out...' : 'Logout'}
           </Text>
         </Pressable>

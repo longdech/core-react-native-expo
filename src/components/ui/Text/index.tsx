@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { BaseText } from '@/components/ui/Text/base-text';
-import { cn } from '@/lib/tailwind';
 import type { TYPOGRAPHY_SCALE } from '@/theme/tokens/responsive-scale';
 import {
   fontVariantClassName,
@@ -18,6 +17,7 @@ import {
 import type { FontWeightType, TextFontStyleType } from '@/theme/typography/font-tokens';
 import type { FontFamilyType, TextSizeType } from '@/theme/typography/fonts';
 import type { TypographyVariant } from '@/theme/typography/types';
+import { cn } from '@/utils/tailwind';
 
 type ScaleKey = keyof typeof TYPOGRAPHY_SCALE;
 

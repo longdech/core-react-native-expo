@@ -1,11 +1,11 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 
-import { devLog } from '@/utils/devLog';
+import { devLog } from '@/utils/dev-log';
 
 import { socketClient } from './client';
-import { SocketContext } from './context';
 import { ClientToServerEvents, ServerToClientEvents } from './events';
+import { SocketContext } from './socket-provider';
 
 export const useSocket = () => {
   const context = useContext(SocketContext);

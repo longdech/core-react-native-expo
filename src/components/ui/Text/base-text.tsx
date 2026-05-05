@@ -6,8 +6,8 @@ import {
   type TextStyle,
 } from 'react-native';
 
-import { cn } from '@/lib/tailwind';
 import type { FontMetrics } from '@/theme/typography/types';
+import { cn } from '@/utils/tailwind';
 
 export type BaseTextProps = Omit<RNTextProps, 'style' | 'className'> & {
   /** fontSize, fontFamily, lineHeight, … — từ `@/theme/typography`. */

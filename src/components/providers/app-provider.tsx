@@ -2,7 +2,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
 import { queryClient } from '@/services/client';
-import { SocketProvider } from '@/services/socket/context';
+import { SocketProvider } from '@/services/socket/socket-provider';
 
 import { AuthProvider } from './auth-provider';
 import { ThemeProvider } from './theme-provider';

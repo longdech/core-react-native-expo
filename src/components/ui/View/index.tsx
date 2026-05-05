@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { View as RNView, ViewProps as RNViewProps } from 'react-native';
 
-import { cn } from '@/lib/tailwind';
+import { cn } from '@/utils/tailwind';
 
 interface ViewProps extends Omit<RNViewProps, 'children' | 'className'> {
   children: ReactNode;

@@ -1,4 +1,3 @@
-import { responsiveFontSize } from '@/lib/responsive';
 import { TYPOGRAPHY_SCALE } from '@/theme/tokens/responsive-scale';
 import {
   type FontWeightType,
@@ -8,6 +7,7 @@ import {
 } from '@/theme/typography/font-tokens';
 import { FontFamilyType, TEXT_SIZES, type TextSizeType } from '@/theme/typography/fonts';
 import type { FontMetrics, TypographyVariant } from '@/theme/typography/types';
+import { responsiveFontSize } from '@/utils/responsive';
 
 type ScaleKey = keyof typeof TYPOGRAPHY_SCALE;
 

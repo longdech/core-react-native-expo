@@ -13,7 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAuth } from '@/hooks/use-auth';
 import { useTheme } from '@/hooks/use-theme';
-import { cn } from '@/lib/tailwind';
+import { cn } from '@/utils/tailwind';
 
 export default function VerifyEmailScreen() {
   const [code, setCode] = useState('');
@@ -50,7 +50,7 @@ export default function VerifyEmailScreen() {
             {isPending && <ActivityIndicator size="small" color={colors.primaryForeground} />}
             <Text
               className={cn(
-                'text-primary-foreground text-center text-sm',
+                'text-center text-sm text-primary-foreground',
                 isPending && 'opacity-50',
               )}
             >

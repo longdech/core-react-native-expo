@@ -1,7 +1,7 @@
 import type { Href } from 'expo-router';
 import { router } from 'expo-router';
 
-import { devWarn } from '@/utils/devLog';
+import { devWarn } from '@/utils/dev-log';
 
 /**
  * Paths that may be opened from notification payloads (`data.screen`).

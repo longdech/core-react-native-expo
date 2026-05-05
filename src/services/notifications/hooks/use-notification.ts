@@ -5,7 +5,7 @@ import * as Notifications from 'expo-notifications';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 
-import { devError, devLog, devWarn } from '@/utils/devLog';
+import { devError, devLog, devWarn } from '@/utils/dev-log';
 
 import { notificationApi } from '../api';
 import { createNotificationChannels } from '../config';

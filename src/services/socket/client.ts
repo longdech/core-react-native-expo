@@ -1,7 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 
 import { ENV } from '@/constants/env';
-import { devError, devLog, devWarn } from '@/utils/devLog';
+import { devError, devLog, devWarn } from '@/utils/dev-log';
 
 import { ClientToServerEvents, ServerToClientEvents, SocketOptions } from './events';
 

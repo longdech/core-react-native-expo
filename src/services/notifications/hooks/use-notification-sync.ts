@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { Platform } from 'react-native';
 
 import { useAuth } from '@/hooks/use-auth';
-import { devError, devLog } from '@/utils/devLog';
+import { devError, devLog } from '@/utils/dev-log';
 
 import { notificationApi } from '../api';
 import { useNotifications } from './use-notification';

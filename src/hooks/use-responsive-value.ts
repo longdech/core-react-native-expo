@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 
-import { responsiveValue } from '@/lib/responsive';
+import { responsiveValue } from '@/utils/responsive';
 
 type ResponsiveArgs<T> = Parameters<typeof responsiveValue<T>>[0];
 

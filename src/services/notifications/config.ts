@@ -1,7 +1,7 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
-import { devLog } from '@/utils/devLog';
+import { devLog } from '@/utils/dev-log';
 
 // Cấu hình handler cho notification khi app đang mở
 Notifications.setNotificationHandler({
