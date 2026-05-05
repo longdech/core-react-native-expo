@@ -1,10 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 
 import { devLog } from '@/utils/devLog';
 
 import { socketClient } from './client';
+import { SocketContext } from './context';
 import { ClientToServerEvents, ServerToClientEvents } from './events';
+
+export const useSocket = () => {
+  const context = useContext(SocketContext);
+  if (!context) {
+    throw new Error('useSocket must be used within SocketProvider');
+  }
+  return context;
+};
 
 // Hook: Listen to socket events
 export const useSocketEvent = <K extends keyof ServerToClientEvents>(

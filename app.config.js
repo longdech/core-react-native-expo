@@ -1,7 +1,10 @@
 module.exports = ({ config }) => {
+  const PRODUCT_NAME = 'Core Expo';
+  const BUNDLE_IDENTIFIER = 'com.longdech.coreexpo';
+
   return {
     ...config,
-    name: 'Core Expo',
+    name: PRODUCT_NAME,
     slug: 'core-react-native-expo',
     version: '1.0.0',
     orientation: 'default', // 'default', 'portrait', 'landscape'
@@ -16,7 +19,7 @@ module.exports = ({ config }) => {
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.longdech.coreexpo',
+      bundleIdentifier: BUNDLE_IDENTIFIER,
       // googleServicesFile: './GoogleService-Info.plist',
     },
     android: {
@@ -27,7 +30,7 @@ module.exports = ({ config }) => {
       edgeToEdgeEnabled: true,
       predictiveBackGestureEnabled: false,
       softwareKeyboardLayoutMode: 'resize',
-      package: 'com.longdech.coreexpo',
+      package: BUNDLE_IDENTIFIER,
       googleServicesFile: './google-services.json',
     },
     web: {
@@ -76,6 +79,14 @@ module.exports = ({ config }) => {
           color: '#ffffff',
           defaultChannel: 'default',
           // enableBackgroundRemoteNotifications: true,
+        },
+      ],
+      [
+        'expo-secure-store',
+        {
+          configureAndroidBackup: true,
+          faceIDPermission: `Cho phép ${PRODUCT_NAME} truy cập vào Face ID của bạn.`,
+          biometricPermission: `Cho phép ${PRODUCT_NAME} truy cập vào biometric của bạn.`,
         },
       ],
     ],

@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
 import { socketClient } from './client';
 
@@ -7,7 +7,7 @@ interface SocketContextValue {
   socketId: string | null;
 }
 
-const SocketContext = createContext<SocketContextValue | undefined>(undefined);
+export const SocketContext = createContext<SocketContextValue | undefined>(undefined);
 
 /**
  * Owns connection state for the app tree. Socket IO itself is a singleton on
@@ -49,12 +49,4 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
   return (
     <SocketContext.Provider value={{ isConnected, socketId }}>{children}</SocketContext.Provider>
   );
-};
-
-export const useSocket = () => {
-  const context = useContext(SocketContext);
-  if (!context) {
-    throw new Error('useSocket must be used within SocketProvider');
-  }
-  return context;
 };
