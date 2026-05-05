@@ -3,6 +3,8 @@ import { z } from 'zod';
 const EnvSchema = z.object({
   appMode: z.enum(['development', 'production', 'testing']).optional().default('development'),
   apiUrl: z.url().optional(),
+  serverIp: z.string().optional(),
+  serverPort: z.string().optional(),
 });
 
 /**
@@ -27,6 +29,8 @@ const validator = (env: Record<string, unknown>) => {
 export const ENV = validator({
   appMode: process.env.EXPO_PUBLIC_APP_MODE,
   apiUrl: process.env.EXPO_PUBLIC_API_URL,
+  serverIp: process.env.EXPO_PUBLIC_SERVER_IP,
+  serverPort: process.env.EXPO_PUBLIC_SERVER_PORT,
 });
 
 export type EnvType = z.infer<typeof EnvSchema>;

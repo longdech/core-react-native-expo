@@ -1,10 +1,6 @@
 import { ENV } from '@/constants/env';
-import {
-  createQueryClient,
-  createServiceProvider,
-  HttpClient,
-  TokenManager,
-} from '@/external/bridge';
+
+import { createQueryClient, createServiceProvider, HttpClient, TokenManager } from './http';
 
 const tokenManager = new TokenManager({
   getAccessToken: () => {
