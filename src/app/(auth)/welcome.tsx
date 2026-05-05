@@ -42,7 +42,6 @@ export default function WelcomeScreen() {
         <View className="flex-1 justify-center gap-6 p-4">
           {notifications.map((notification) => (
             <View key={notification.id} className="flex-row items-center gap-2">
-              <Text>{notification.title}</Text>
               <Text>{notification.message}</Text>
             </View>
           ))}

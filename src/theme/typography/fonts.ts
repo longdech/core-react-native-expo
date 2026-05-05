@@ -12,16 +12,16 @@ export type TextSizeType =
   | '5xl';
 
 export const TEXT_SIZES: Record<TextSizeType, number> = {
-  xxs: 11,
-  xs: 13, // caption
-  sm: 15, // button, input
-  base: 17, // body
-  lg: 19,
-  xl: 21,
-  '2xl': 25, // h3
-  '3xl': 30, // h2
-  '4xl': 36, // h1
-  '5xl': 48, // display
+  xxs: 10,
+  xs: 12, // caption
+  sm: 14, // button, input
+  base: 16, // body
+  lg: 18,
+  xl: 20,
+  '2xl': 24, // h3
+  '3xl': 28, // h2
+  '4xl': 32, // h1
+  '5xl': 40, // display
 };
 
 export const FONT_FAMILIES = {
