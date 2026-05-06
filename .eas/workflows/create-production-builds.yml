@@ -1,0 +1,41 @@
+name: Create Production Builds & Submit
+
+# Workflow này sẽ:
+# 1. Build Android và iOS song song với profile production (autoIncrement version)
+# 2. Sau khi build xong, tự động submit lên Google Play và App Store Connect
+
+jobs:
+  # ─── STEP 1: Build ──────────────────────────────────────────────────────────
+
+  build_android:
+    name: 'Build Android (production)'
+    type: build
+    params:
+      platform: android
+      profile: production
+
+  build_ios:
+    name: 'Build iOS (production)'
+    type: build
+    params:
+      platform: ios
+      profile: production
+
+  # ─── STEP 2: Submit ─────────────────────────────────────────────────────────
+  # Chạy sau khi build tương ứng hoàn thành thành công
+
+  submit_android:
+    name: 'Submit Android → Google Play'
+    type: submit
+    needs: [build_android] # Chỉ chạy nếu build_android thành công
+    params:
+      build_id: ${{ needs.build_android.outputs.build_id }}
+      profile: production
+
+  submit_ios:
+    name: 'Submit iOS → App Store Connect'
+    type: submit
+    needs: [build_ios] # Chỉ chạy nếu build_ios thành công
+    params:
+      build_id: ${{ needs.build_ios.outputs.build_id }}
+      profile: production

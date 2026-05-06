@@ -1,12 +1,15 @@
 {
-  "name": "mobile",
+  "name": "core-react-native-expo",
   "version": "1.0.0",
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
     "android": "expo run:android",
-    "build:android": "eas build --profile development --platform android",
-    "build:ios": "eas build --profile development --platform ios",
+    "build:eas-android": "eas build --profile development --platform android",
+    "build:eas-ios": "eas build --profile development --platform ios",
+    "build:eas-preview": "npx eas-cli@latest workflow:run create-preview-builds.yml",
+    "build:local-android": "cd android && ./gradlew assembleRelease && cd ..",
+    "deploy:eas-production": "npx eas-cli@latest workflow:run create-production-builds.yml",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "ios": "expo run:ios",
