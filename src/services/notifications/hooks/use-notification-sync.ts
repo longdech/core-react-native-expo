@@ -9,7 +9,7 @@ import { StorageKeys, storageService } from '@/services/storage';
 import { devError, devLog } from '@/utils/dev-log';
 
 import { notificationApi } from '../api';
-import { useNotifications } from './use-notification';
+import { useNotification } from './use-notification';
 
 // Tạo device ID duy nhất (chỉ 1 lần)
 const getDeviceId = async (): Promise<string> => {
@@ -29,7 +29,7 @@ const getDeviceInfo = async () => ({
 });
 
 export const useNotificationSync = () => {
-  const { getPushToken, requestPermissions, canUseRemotePush } = useNotifications();
+  const { getPushToken, requestPermissions, canUseRemotePush } = useNotification();
   const { isAuthenticated, user } = useAuth();
   const isSyncingRef = useRef(false);
   const lastTokenRef = useRef<string | null>(null);

@@ -6,7 +6,7 @@ import {
   scheduleDailyNotification,
   scheduleNotificationAfter,
   sendLocalNotification,
-  useNotifications,
+  useNotification,
 } from '@/services/notifications';
 
 export default function NotificationsTestScreen() {
@@ -17,7 +17,7 @@ export default function NotificationsTestScreen() {
     getPushToken,
     isExpoGo,
     canUseRemotePush,
-  } = useNotifications();
+  } = useNotification();
 
   const [lastAction, setLastAction] = useState('');
   const [pushToken, setPushToken] = useState<string | null>(null);

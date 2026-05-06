@@ -17,7 +17,7 @@ export type GetPushTokenOptions = {
   requestPermission?: boolean;
 };
 
-export const useNotifications = () => {
+export const useNotification = () => {
   const [permissionGranted, setPermissionGranted] = useState(false);
   const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
   const [notification, setNotification] = useState<Notifications.Notification | null>(null);
