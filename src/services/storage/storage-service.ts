@@ -5,10 +5,9 @@ class StorageService {
   private static instance: StorageService;
   private constructor() {}
 
-  static async getInstance() {
+  static getInstance(): StorageService {
     if (!StorageService.instance) {
       StorageService.instance = new StorageService();
-      await getStorage(); // Ensure initialization
     }
     return StorageService.instance;
   }
@@ -108,4 +107,4 @@ class StorageService {
   }
 }
 
-export const storageService = await StorageService.getInstance();
+export const storageService = StorageService.getInstance();

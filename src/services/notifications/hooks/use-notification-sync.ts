@@ -1,25 +1,22 @@
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
-import * as SecureStore from 'expo-secure-store';
 import { useCallback, useEffect, useRef } from 'react';
 import { Platform } from 'react-native';
 
 import { useAuth } from '@/hooks/use-auth';
+import { StorageKeys, storageService } from '@/services/storage';
 import { devError, devLog } from '@/utils/dev-log';
 
 import { notificationApi } from '../api';
 import { useNotifications } from './use-notification';
 
-const TOKEN_STORAGE_KEY = '@push_token';
-const DEVICE_ID_KEY = '@device_id';
-
 // Tạo device ID duy nhất (chỉ 1 lần)
 const getDeviceId = async (): Promise<string> => {
-  let deviceId = await SecureStore.getItemAsync(DEVICE_ID_KEY);
+  let deviceId = await storageService.getString(StorageKeys.DEVICE_ID);
   if (!deviceId) {
     deviceId = `${Device.osName || Platform.OS}_${Constants.deviceId || Date.now()}`;
-    await SecureStore.setItemAsync(DEVICE_ID_KEY, deviceId);
+    await storageService.setString(StorageKeys.DEVICE_ID, deviceId);
   }
   return deviceId;
 };
@@ -39,18 +36,18 @@ export const useNotificationSync = () => {
 
   // Lấy token đã lưu trong storage
   const getStoredToken = useCallback(async (): Promise<string | null> => {
-    return await SecureStore.getItemAsync(TOKEN_STORAGE_KEY);
+    return (await storageService.getString(StorageKeys.PUSH_TOKEN)) ?? null;
   }, []);
 
   // Lưu token vào storage
   const storeToken = useCallback(async (token: string) => {
-    await SecureStore.setItemAsync(TOKEN_STORAGE_KEY, token);
+    await storageService.setString(StorageKeys.PUSH_TOKEN, token);
     lastTokenRef.current = token;
   }, []);
 
   // Xóa token khỏi storage
   const clearStoredToken = useCallback(async () => {
-    await SecureStore.deleteItemAsync(TOKEN_STORAGE_KEY);
+    await storageService.remove(StorageKeys.PUSH_TOKEN);
     lastTokenRef.current = null;
   }, []);
 
@@ -176,10 +173,11 @@ export const useNotificationSync = () => {
     const token = await getStoredToken();
     if (token && isAuthenticated) {
       await notificationApi.unregisterToken(token);
-      await clearStoredToken();
+      // TODO: Keep token if want sent notification to this device
+      // await clearStoredToken();
       devLog('notification-sync', 'Token unregistered on logout');
     }
-  }, [isAuthenticated, getStoredToken, clearStoredToken]);
+  }, [isAuthenticated, getStoredToken]);
 
   return {
     checkAndSyncToken,

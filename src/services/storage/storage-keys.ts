@@ -1,6 +1,7 @@
 export const StorageKeys = {
   // Device
   DEVICE_ID: '@device/id',
+  PUSH_TOKEN: '@push/token',
 
   // Auth
   AUTH_TOKEN: '@auth/token',
