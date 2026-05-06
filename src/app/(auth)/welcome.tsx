@@ -51,6 +51,9 @@ export default function WelcomeScreen() {
           <Link href="/notifications-test" asChild>
             <Button title="Notifications Test" />
           </Link>
+          <Link href="/firebase-test" asChild>
+            <Button title="Firebase Test" />
+          </Link>
         </View>
       </ScrollView>
     </SafeAreaView>

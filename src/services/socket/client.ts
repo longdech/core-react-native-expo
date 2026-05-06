@@ -7,7 +7,7 @@ import { ClientToServerEvents, ServerToClientEvents, SocketOptions } from './eve
 
 const getSocketBaseUrl = (): string => {
   if (!__DEV__) {
-    return ENV.apiUrl ?? '';
+    return ENV.apiSocketUrl ?? '';
   }
 
   return `http://${ENV.serverIp}:${ENV.serverPort}`;
