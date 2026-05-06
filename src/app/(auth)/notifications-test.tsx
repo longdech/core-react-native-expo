@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Alert, Button, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { useNotifications } from '@/services/notifications/hooks';
 import {
   cancelAllNotifications,
   scheduleDailyNotification,
   scheduleNotificationAfter,
   sendLocalNotification,
-} from '@/services/notifications/local';
+  useNotifications,
+} from '@/services/notifications';
 
 export default function NotificationsTestScreen() {
   const {

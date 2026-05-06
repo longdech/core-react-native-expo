@@ -14,7 +14,7 @@ import { AppProvider } from '@/components/providers/app-provider';
 import { useAuth } from '@/hooks/use-auth';
 import { useFont } from '@/hooks/use-font';
 import { useTheme } from '@/hooks/use-theme';
-import { useNotificationSync } from '@/services/notifications/hooks';
+import { useNotificationSync } from '@/services/notifications';
 import { initializeMMKV } from '@/services/storage/secure-storage';
 
 export { ErrorBoundary } from 'expo-router';
